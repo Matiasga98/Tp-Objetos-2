@@ -1,0 +1,36 @@
+import hechiceria.*
+describe "PRUEBA TEST 1" {
+
+test "rolando tiene 56 como valor de nivel de hechiceria" {
+	assert.equals(56, rolando.nivelDeHechiceria())
+}
+
+test "si el nombre se cambia a 'espectro superrecontramalefico muajajaja' nivel de hechiceria de Rolando es 125" {
+	espectroMalefico.nombre("espectro superrecontramalefico muajajaja")
+	assert.equals(125, rolando.nivelDeHechiceria())
+}
+
+test "si hechizo preferido pasa a ser hechizoBasico, nivel de hechiceria de Rolando es 35"{
+	rolando.hechizoPreferido(hechizoBasico)
+	assert.equals(35, rolando.nivelDeHechiceria())
+}
+
+test "si hay eclipse, nivel de hechiceria de Rolando es 61"{
+	eclipse.eclipsar()
+	assert.equals(61, rolando.nivelDeHechiceria())
+}
+
+test "espectro malefico es poderoso seeeeeeeeeee"{
+	assert.that(espectroMalefico.poderoso())
+}
+
+test "si se cambia el nombre del espectro malefico a 'pepe', el espectro malefico no es poderoso"{
+	espectroMalefico.nombre("pepe")
+	assert.that(!espectroMalefico.poderoso())
+}
+
+test "hechizo basico no es poderoso"{
+	assert.that(!hechizoBasico.poderoso())
+}
+
+}

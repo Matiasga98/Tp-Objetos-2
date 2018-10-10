@@ -1,0 +1,14 @@
+import hechiceriaRecargada.*
+import luchaReformulada.*
+
+var espadaDelDestino = new ArmaDelDestino
+var mascaraOscura = new Mascara (1)
+var rolando = new Personaje (hechizoIneficiente,[espadaDelDestino,collarDivino,mascaraOscura])
+
+test "Valor de lucha es 1 cuando no tiene artefactos" {
+	rolando.removerArtefacto(espadaDelDestino)
+	rolando.removerArtefacto(collarDivino)
+	rolando.removerArtefacto(mascaraOscura)
+	assert.equals(1,rolando.valorDeLucha())
+
+}

@@ -1,0 +1,40 @@
+import hechiceria.*
+import lucha.*
+describe "PRUEBA TEST 2" {
+
+test "si se eliminan los artefactos de rolando, rolando queda con valor de lucha 1"{
+	rolando.removerArtefacto(espadaDelDestino)
+	rolando.removerArtefacto(collarDivino)
+	rolando.removerArtefacto(mascaraOscura) //???????????
+	assert.equals(1, rolando.valorDeLucha())
+}
+
+test "valor de lucha es 13 si rolando tiene todos los artefactos"{
+	assert.equals(13, rolando.valorDeLucha())
+}
+
+test "si cambias el collar a 3 perlas y tiene todos los artefactos, la habilidad de lucha es 11 "{
+	collarDivino.perlas(3)
+	assert.equals(11, rolando.valorDeLucha())
+}
+
+test "si cambias el valor de base de lucha a 8, la habilidad de lucha es 20"{
+	rolando.valorBaseLucha(8)
+	assert.equals(20,rolando.valorDeLucha())
+}
+
+test "si ocurre un eclipse, el valor de fuerza oscura de la mascara oscura es 5"{
+	eclipse.eclipsar()
+	assert.equals(5, mascaraOscura.aporte())
+}
+
+test "si eliminas mascaraOscura de los artefactos de rolando, la habilidad de lucha de rolando es 9"{
+	rolando.removerArtefacto(mascaraOscura)
+	assert.equals(9, rolando.valorDeLucha())
+}
+
+
+
+
+
+}

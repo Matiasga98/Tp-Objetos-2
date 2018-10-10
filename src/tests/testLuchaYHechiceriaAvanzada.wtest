@@ -1,0 +1,55 @@
+import hechiceria.*
+import lucha.*
+import luchaYHechiceriaAvanzada.*
+
+test "Rolando esta cargado"{
+	assert.that(rolando.estaCargado())
+}
+
+test "si Rolando se saca la armadura, no esta cargado"{
+	rolando.removerArtefacto(armadura)
+	assert.that(!rolando.estaCargado())
+}
+
+test "Rolando tiene lucha 20"{
+	assert.equals(20, rolando.valorDeLucha())
+}
+
+test "si Rolando tiene una bendicion de refuerzo, aporte de la armadura es 58"{
+	armadura.refuerzo(bendicion)
+	assert.equals(58, armadura.aporte())
+}
+
+test "si Rolando tiene una cota de malla de refuerzo, aporte de la armadura es 3"{
+	armadura.refuerzo(cotaDeMalla)
+	assert.equals(3, armadura.aporte())
+}
+
+test "si rolando tiene un hechizo basico de refuerzo, aporte de la armadura es 12"{
+	hechizo.tipoDeHechizo(hechizoBasico)
+	armadura.refuerzo(hechizo)
+	assert.equals(12, armadura.aporte())
+}
+
+test "si rolando tiene un espectro malefico de refuerzo, aporte de la armadura es 19"{
+	hechizo.tipoDeHechizo(espectroMalefico)
+	armadura.refuerzo(hechizo)
+	assert.equals(19, armadura.aporte())
+}
+
+test "si Rolando solo tiene un espejo, valor de lucha es 1"{
+	rolando.removerArtefacto(espadaDelDestino)
+	rolando.removerArtefacto(mascaraOscura)
+	rolando.removerArtefacto(collarDivino)
+	rolando.removerArtefacto(armadura)
+	assert.equals(1, rolando.valorDeLucha())
+}
+
+test "si Rolando tiene como hechizo preferido el libro de hechizos, y contiene espectro malefico de nombre 'espectro malefico' y hechizo basico, su nivel de hechiceria es 56"{
+	libroDeHechizos.hechizos([espectroMalefico, hechizoBasico])
+	rolando.hechizoPreferido(libroDeHechizos)
+	assert.equals(56, rolando.nivelDeHechiceria())	
+}
+
+
+
