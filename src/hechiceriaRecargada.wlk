@@ -10,6 +10,8 @@ class Personaje {
 	var property hechizoPreferido 
 	var property valorBaseLucha = 1 // 
 	var property artefactos = []
+	var property monedas = 100
+	var property compraExitosa
 		
 	constructor(unHechizoPreferido, unosArtefactos){
 		hechizoPreferido  = unHechizoPreferido
@@ -39,10 +41,52 @@ class Personaje {
 		return artefactos.map({artefacto => artefacto.aporte()}).sum()
 	}
 	
+	method mayorLuchaQueHechiceria() = self.valorDeLucha() > self.nivelDeHechiceria()
+	
+	method tieneSoloEspejos() = self.removerEspejos().isEmpty()
+	
+	method removerEspejos(){
+			return artefactos.filter({artefacto => artefacto.className() !="luchaYhechiceriaPlus.Espejo"})
+	}
+	
+	method maximoAporte(){
+		return self.removerEspejos().map({artefacto => artefacto.aporte()}).max()
+	}
+	
+	method estaCargado() = artefactos.size() >= 5
+	
+	method canjearHechizo(hechizoAComprar){
+		if (monedas + hechizoPreferido.costo()/2 >= hechizoAComprar.costo()){
+			monedas -= (hechizoAComprar.costo()-hechizoPreferido.costo()/2).max(0) 
+			hechizoPreferido = hechizoAComprar
+			compraExitosa = true
+		}
+		else{
+			compraExitosa = false
+		}
+	
+	}
+	
+	method comprarArtefacto (artefactoAComprar){
+		if (monedas >= artefactoAComprar.costo()){
+			monedas -= artefactoAComprar.costo()
+			self.agregarArtefacto(artefactoAComprar)
+			compraExitosa = true
+		}
+		else{
+			compraExitosa = false
+		}
+		
+	}
+	
+	method cumplirObjetivo (){
+		monedas +=10
+	}
 	
 }
 
 class Logos {
+	
 	var property nombre
 	var property poderDeHechiceria
 	
@@ -56,7 +100,12 @@ class Logos {
 	}
 	
 	method poderoso() = self.poder()>15
+	method costo(){
+		return self.poder()
+	}
 }
+
+
 object hechizoIneficiente{
 	method poder(){
 		return 0
@@ -64,11 +113,18 @@ object hechizoIneficiente{
 	method poderoso() = false
 }
 object hechizoBasico{
+	
 	method poder(){  
 		return 10    
 	}
 	
 	method poderoso() = false
+	method costo (){
+		return 10
+	}
+	
+
+	
 }
 
 object fuerzaOscura{

@@ -7,6 +7,9 @@ class ArmaDelDestino{
 	method aporte(){
 		return 3
 	}
+	method costo (){
+		return 5*self.aporte()
+	}
 }
 
 object collarDivino{
@@ -14,6 +17,9 @@ object collarDivino{
 	
 	method aporte(){
 		return perlas
+	}
+	method costo (){
+		return 2*perlas
 	}
 }
 
